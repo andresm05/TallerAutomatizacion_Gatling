@@ -13,18 +13,24 @@ class AddContactTest extends Simulation{
     //Verificar de forma general para todas las solicitudes
     .check(status.is(200))
 
-    // Generar email aleatorio
-  def randomEmail(): String = {
-    val prefix = Random.alphanumeric.filter(_.isLetter).take(8).mkString
-    s"$prefix@gmail.com"
-  }
+  def login() = {
+  exec(http("login")
+    .post("/users/login")
+    .body(StringBody(
+      s"""
+         |{
+         |  "email": "$email",
+         |  "password": "$password"
+         |}
+         |""".stripMargin)).asJson
+    .check(jsonPath("$.token").saveAs("authToken"))
+  )
+}
 
   // 2 Scenario Definition
   val scn = scenario("contact")
-    .exec { session =>
-      session.set("email", randomEmail())
-    }
     .exec(http("contact")
+    .exec(login()) // Llamar al login para obtener el token
       .post(s"/contacts")
       .header("Authorization", "Bearer ${authToken}") // Usar el token guardado en la variable
       .body(StringBody(
@@ -33,7 +39,7 @@ class AddContactTest extends Simulation{
            |  "firstName": "$firstName",
            |  "lastName": "$lastName",
            |  "birthDate": "$birthDate",
-           |  "email": "${email}",
+           |  "email": "$contactEmail",
            |  "phone": "$phone",
            |  "street1": "$street1",
            |  "street2": "$street2",

@@ -11,6 +11,7 @@ object Data{
     val street1 = "123 Main St"
     val street2 = "Apt 4B"
     val city = "Springfield"
+    val contactEmail = "newcontact@gmail.com"
     val stateProvince = "IL"
     val postalCode = "62701"
     val country = "USA"
