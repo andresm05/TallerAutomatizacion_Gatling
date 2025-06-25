@@ -38,7 +38,7 @@ class AddContactTest extends Simulation{
            |{
            |  "firstName": "$firstName",
            |  "lastName": "$lastName",
-           |  "birthDate": "$birthDate",
+           |  "birthdate": "$birthDate",
            |  "email": "$contactEmail",
            |  "phone": "$phone",
            |  "street1": "$street1",
