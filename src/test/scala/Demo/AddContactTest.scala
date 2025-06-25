@@ -20,7 +20,7 @@ class AddContactTest extends Simulation{
   }
 
   // 2 Scenario Definition
-  val scn = scenario("contact").
+  val scn = scenario("contact")
     .exec { session =>
       session.set("email", randomEmail())
     }
