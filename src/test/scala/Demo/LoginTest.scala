@@ -15,13 +15,20 @@ class LoginTest extends Simulation{
   // 2 Scenario Definition
   val scn = scenario("Login").
     exec(http("login")
-      .get(s"/login/$username/$password")
+      .post(s"/users/login")
+      .body(StringBody(
+        s"""
+           |{
+           |  "email": "$email",
+           |  "password": "$password"
+           |}
+           |""".stripMargin)).asJson
        //Recibir información de la cuenta
       .check(status.is(200))
     )
 
   // 3 Load Scenario
   setUp(
-    scn.inject(rampUsersPerSec(5).to(15).during(30))
+    scn.inject(atOnceUsers(100))
   ).protocols(httpConf);
 }
