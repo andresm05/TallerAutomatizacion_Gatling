@@ -25,6 +25,7 @@ class LoginTest extends Simulation{
            |""".stripMargin)).asJson
        //Recibir información de la cuenta
       .check(status.is(200))
+      .check(jsonPath("$.token").saveAs("authToken")) //Guardar el token en una variable
     )
 
   // 3 Load Scenario
