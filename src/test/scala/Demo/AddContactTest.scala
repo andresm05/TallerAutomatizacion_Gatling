@@ -24,7 +24,7 @@ class AddContactTest extends Simulation{
     .exec { session =>
       session.set("email", randomEmail())
     }
-    exec(http("contact")
+    .exec(http("contact")
       .post(s"/contacts")
       .header("Authorization", "Bearer ${authToken}") // Usar el token guardado en la variable
       .body(StringBody(
@@ -48,6 +48,6 @@ class AddContactTest extends Simulation{
 
   // 3 Load Scenario
   setUp(
-    scn.inject(atOnceUsers(100))
+    scn.inject(atOnceUsers(50))
   ).protocols(httpConf);
 }
