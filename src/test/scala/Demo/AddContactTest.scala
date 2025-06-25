@@ -54,6 +54,6 @@ class AddContactTest extends Simulation{
 
   // 3 Load Scenario
   setUp(
-    scn.inject(atOnceUsers(50))
+    scn.inject(rampUsersPerSec(5).to(15).during(30))
   ).protocols(httpConf);
 }

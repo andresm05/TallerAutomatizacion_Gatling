@@ -6,7 +6,7 @@ object Data{
     val password = "1234567"
     val firstName = "Jaime"
     val lastName = "Osorio"
-    val birthDate = "1990-01-01"
+    val birthDate = "1970-01-01"
     val phone = "1234567890"
     val street1 = "123 Main St"
     val street2 = "Apt 4B"
