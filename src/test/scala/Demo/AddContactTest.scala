@@ -29,8 +29,8 @@ class AddContactTest extends Simulation{
 
   // 2 Scenario Definition
   val scn = scenario("contact")
-    .exec(http("contact")
     .exec(login()) // Llamar al login para obtener el token
+    .exec(http("contact")
       .post(s"/contacts")
       .header("Authorization", "Bearer ${authToken}") // Usar el token guardado en la variable
       .body(StringBody(
